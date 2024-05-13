@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { PiEyeClosedBold } from "react-icons/pi";
 import { PiEyeBold } from "react-icons/pi";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "./AuthProvider";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
+    const { exitingUser, googleSignIn } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const [showPass, setShowPass] = useState(false);
 
@@ -15,7 +20,30 @@ const Login = () => {
         const password = form.password.value;
         const loginUser = { email, password };
         console.log(loginUser);
+
+        // firebase
+        exitingUser(email, password)
+            .then(result => {
+                console.log(result.user);
+                toast.success('login Successfully')
+                form.reset();
+                navigate('/');
+            })
+            .catch(error => {
+                toast.error(error.message);
+            })
     }
+    const handleGoogleLogin = () =>{
+        googleSignIn()
+        .then(result => {
+            const user = result.user
+            console.log(user);
+        })
+        .catch(error => {
+            console.log(error.message)
+        })
+    }
+
 
     return (
         <div className="hero min-h-screen mt-10">
@@ -31,7 +59,7 @@ const Login = () => {
                     <form onSubmit={handleLogin} className="card-body">
                         <div className="text-center">
                             <h1 className="font-bold mb-4 text-lg">login With</h1>
-                            <div className="w-full border-2 p-3 cursor-pointer my-2 flex items-center justify-center gap-2 btn shadow-md">
+                            <div onClick={handleGoogleLogin} className="w-full border-2 p-3 cursor-pointer my-2 flex items-center justify-center gap-2 btn shadow-md">
                                 <FcGoogle className="text-xl" />
                                 <h1>Google</h1>
                             </div>
@@ -70,6 +98,8 @@ const Login = () => {
                     <img src="https://i.postimg.cc/YS2nttx5/image-1.png" alt="" />
                 </div>
             </div>
+            <ToastContainer />
+            <ToastContainer />
         </div>
     );
 };

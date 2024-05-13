@@ -1,13 +1,16 @@
 import { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { PiEyeClosedBold } from "react-icons/pi";
 import { PiEyeBold } from "react-icons/pi";
 import { AuthContext } from "./AuthProvider";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
 
-    const {SignUpUser} = useContext(AuthContext)
+    const { createUser } = useContext(AuthContext)
     const [showPass, setShowPass] = useState(false);
+    const navigate = useNavigate()
 
     const handleSignUp = e => {
         e.preventDefault()
@@ -16,30 +19,33 @@ const SignUp = () => {
         const email = form.email.value;
         const photoURL = form.photoURL.value;
         const password = form.password.value;
-        const SignUpUser = {name, email, photoURL, password};
+        const SignUpUser = { name, email, photoURL, password };
         console.log(SignUpUser);
 
         // validation check
-        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-            return console.log("Please provide a valid email");
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return toast.warning("Please provide a valid email");
         }
-        if(password.length < 6){
-            return console.log('Password must be at least 6 characters');
+        if (password.length < 6) {
+            return toast.warning('Password must be at least 6 characters');
         }
-        if(!/^(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password)){
-            return console.log('password must be at least one uppercase and one lowercase letter');
+        if (!/^(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password)) {
+            return toast.warning('password must be at least one uppercase and one lowercase letter');
         }
 
         // Firebase
-        SignUpUser(email, password)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-        })
-        .catch(error => {
-            console.log(error.message);
-        })
-        
+        createUser(email, password)
+            .then(result => {
+                const user = result.user
+                console.log(user);
+                form.reset();
+                toast.success('Successfully Register');
+                navigate('/login')
+            })
+            .catch(error => {
+                toast.error(error.message);
+            })
+
     }
     return (
         <div className="hero min-h-screen mt-10">
@@ -54,7 +60,7 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type="text" placeholder="name" name="name" className="input input-bordered"/>
+                            <input type="text" placeholder="name" name="name" className="input input-bordered" />
                         </div>
 
                         <div className="form-control">
@@ -68,13 +74,13 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">PhotoURL</span>
                             </label>
-                            <input type="text" placeholder="PhotoURL" name="photoURL" className="input input-bordered" required />
+                            <input type="text" placeholder="PhotoURL" name="photoURL" className="input input-bordered" />
                         </div>
                         <div className="form-control relative">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type={ showPass ? "text" : "password"} placeholder="password" name="password" className="input input-bordered" required />
+                            <input type={showPass ? "text" : "password"} placeholder="password" name="password" className="input input-bordered" required />
                             <div className="absolute right-3 top-[52px]">
                                 <span onClick={() => setShowPass(!showPass)}>{!showPass ? <PiEyeClosedBold /> : <PiEyeBold />}</span>
 
@@ -90,6 +96,8 @@ const SignUp = () => {
                     </form>
                 </div>
             </div>
+            <ToastContainer/>
+            <ToastContainer />
         </div>
     );
 };

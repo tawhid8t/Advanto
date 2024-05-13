@@ -1,36 +1,52 @@
 import { NavLink } from "react-router-dom";
 import Advanto_logo from "../assets/images/Advanto_logo.png"
+import { useState } from "react";
+import { AuthContext } from "../Auth/AuthProvider";
 
 const Navbar = () => {
+
+    const { user, logOut } = useState(AuthContext)
+    console.log(user);
+
+
+    const handleLogout = () => {
+        logOut()
+            .then(() => {
+                console.log('sign Out Successfully');
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    }
     const links = <div className="font-semibold text-base flex flex-col lg:flex-row gap-4 items-center">
         <li><NavLink className={({ isActive, isPending }) =>
-                      isActive
-                        ? "border-b-2 border-[#63D5D7] text-[#63D5D7]"
-                        : isPending
-                        ? "pending"
-                        : ""
-                    } to="/">Home</NavLink></li>
+            isActive
+                ? "border-b-2 border-[#63D5D7] text-[#63D5D7]"
+                : isPending
+                    ? "pending"
+                    : ""
+        } to="/">Home</NavLink></li>
         <li><NavLink className={({ isActive, isPending }) =>
-                      isActive
-                        ? "border-b-2 border-[#63D5D7] text-[#63D5D7]"
-                        : isPending
-                        ? "pending"
-                        : ""
-                    } to="/allSpot">All Tourists Spot</NavLink></li>
-        <li><NavLink  className={({ isActive, isPending }) =>
-                      isActive
-                        ? "border-b-2 border-[#63D5D7] text-[#63D5D7]"
-                        : isPending
-                        ? "pending"
-                        : ""
-                    } to="/addSpot">Add Tourists Spot</NavLink></li>
-        <li><NavLink  className={({ isActive, isPending }) =>
-                      isActive
-                        ? "border-b-2 border-[#63D5D7] text-[#63D5D7]"
-                        : isPending
-                        ? "pending"
-                        : ""
-                    } to="/myList">My List</NavLink></li>
+            isActive
+                ? "border-b-2 border-[#63D5D7] text-[#63D5D7]"
+                : isPending
+                    ? "pending"
+                    : ""
+        } to="/allSpot">All Tourists Spot</NavLink></li>
+        <li><NavLink className={({ isActive, isPending }) =>
+            isActive
+                ? "border-b-2 border-[#63D5D7] text-[#63D5D7]"
+                : isPending
+                    ? "pending"
+                    : ""
+        } to="/addSpot">Add Tourists Spot</NavLink></li>
+        <li><NavLink className={({ isActive, isPending }) =>
+            isActive
+                ? "border-b-2 border-[#63D5D7] text-[#63D5D7]"
+                : isPending
+                    ? "pending"
+                    : ""
+        } to="/myList">My List</NavLink></li>
     </div>
     return (
         <div>
@@ -54,6 +70,9 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
+                    {
+                        user && <span>{user.email}</span>
+                    }
                     <div className="flex gap-2 items-center">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
@@ -62,7 +81,7 @@ const Navbar = () => {
                         </div>
                         <div className="flex items-center gap-2">
                             <NavLink to="/login"><button className="btn">Login</button></NavLink>
-                            <button className="btn">Logout</button>
+                            <button onClick={handleLogout} className="btn">Logout</button>
                         </div>
                     </div>
                 </div>
