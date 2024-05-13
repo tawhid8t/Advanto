@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 
 
 function AddSpot() {
@@ -18,6 +19,29 @@ function AddSpot() {
         const userName = form.userName.value;
         const newSpot = {image, tourists_spot_name, country_Name, location, short_description, average_cost, seasonality, travel_time, totalVisitorsPerYear, userEmail, userName}
         console.log(newSpot);
+
+        // send data to the backend
+        fetch('http://localhost:5000/allSpots',{
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(newSpot)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.insertedId){
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Spot Added Successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            }
+            form.reset()
+        })
     }
 
     return (
