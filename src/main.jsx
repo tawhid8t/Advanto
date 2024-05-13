@@ -11,6 +11,9 @@ import Home from './Components/Home/Home';
 import AllSpot from './Components/All_Tourist_Spot/AllSpot';
 import AddSpot from './Components/Add_Tourist_spot/AddSpot';
 import MyList from './Components/MyList/MyList';
+import Login from './Auth/Login';
+import SignUp from './Auth/SignUp';
+import AuthProvider from './Auth/AuthProvider';
 
 const router = createBrowserRouter([
   {
@@ -33,12 +36,22 @@ const router = createBrowserRouter([
         path: '/myList',
         element: <MyList></MyList>
       },
+      {
+        path: '/login',
+        element: <Login></Login>
+      },
+      {
+        path: '/signUp',
+        element: <SignUp></SignUp>
+      },
     ]
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <AuthProvider>
     <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 )

@@ -1,12 +1,37 @@
 import { NavLink } from "react-router-dom";
+import Advanto_logo from "../assets/images/Advanto_logo.png"
 
 const Navbar = () => {
-    const links = <>
-        <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/allSpot">All Tourists Spot</NavLink></li>
-        <li><NavLink to="/addSpot">Add Tourists Spot</NavLink></li>
-        <li><NavLink to="/myList">My List</NavLink></li>
-    </>
+    const links = <div className="font-semibold text-base flex flex-col lg:flex-row gap-4 items-center">
+        <li><NavLink className={({ isActive, isPending }) =>
+                      isActive
+                        ? "border-b-2 border-[#63D5D7] text-[#63D5D7]"
+                        : isPending
+                        ? "pending"
+                        : ""
+                    } to="/">Home</NavLink></li>
+        <li><NavLink className={({ isActive, isPending }) =>
+                      isActive
+                        ? "border-b-2 border-[#63D5D7] text-[#63D5D7]"
+                        : isPending
+                        ? "pending"
+                        : ""
+                    } to="/allSpot">All Tourists Spot</NavLink></li>
+        <li><NavLink  className={({ isActive, isPending }) =>
+                      isActive
+                        ? "border-b-2 border-[#63D5D7] text-[#63D5D7]"
+                        : isPending
+                        ? "pending"
+                        : ""
+                    } to="/addSpot">Add Tourists Spot</NavLink></li>
+        <li><NavLink  className={({ isActive, isPending }) =>
+                      isActive
+                        ? "border-b-2 border-[#63D5D7] text-[#63D5D7]"
+                        : isPending
+                        ? "pending"
+                        : ""
+                    } to="/myList">My List</NavLink></li>
+    </div>
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -19,7 +44,9 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">daisyUI</a>
+                    <div className="w-full">
+                        <img className="w-20" src={Advanto_logo} alt="" />
+                    </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -34,7 +61,7 @@ const Navbar = () => {
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
-                            <button className="btn">Login</button>
+                            <NavLink to="/login"><button className="btn">Login</button></NavLink>
                             <button className="btn">Logout</button>
                         </div>
                     </div>
