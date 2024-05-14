@@ -15,11 +15,13 @@ import Login from './Auth/Login';
 import SignUp from './Auth/SignUp';
 import AuthProvider from './Auth/AuthProvider';
 import SpotDetails from './Components/SpotDetails/SpotDetails';
+import PageNotFound from './Error/PageNotFound';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <PageNotFound></PageNotFound>,
     children: [
       {
         path: '/',
