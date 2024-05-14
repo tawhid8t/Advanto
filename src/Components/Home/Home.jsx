@@ -1,8 +1,10 @@
+import AboutUs from "./AboutUs";
 
 const Home = () => {
     return (
-       <div></div>
-
+       <div>
+        <AboutUs></AboutUs>
+       </div>
     );
 };
 
