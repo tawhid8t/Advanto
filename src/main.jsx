@@ -14,6 +14,7 @@ import MyList from './Components/MyList/MyList';
 import Login from './Auth/Login';
 import SignUp from './Auth/SignUp';
 import AuthProvider from './Auth/AuthProvider';
+import SpotDetails from './Components/SpotDetails/SpotDetails';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
       {
         path: '/myList',
         element: <MyList></MyList>
+      },
+      {
+        path: '/spotDetails/:id',
+        element: <SpotDetails></SpotDetails>,
+        loader: ({params}) => fetch(`http://localhost:5000/allSpots/${params.id}`)
       },
       {
         path: '/login',
