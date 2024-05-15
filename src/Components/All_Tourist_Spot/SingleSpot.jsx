@@ -12,21 +12,21 @@ const SingleSpot = ({ spot }) => {
                         <h2 className='text-xl font-semibold'>${average_cost}/day</h2>
                     </div>
                     <div>
-                        <h1>{short_description.slice(0, 100)}...</h1>
+                        <h1 className='text-[#868EA4]'>{short_description.slice(0, 100)}...</h1>
                     </div>
                     <div className='flex flex-col text-lg font-medium gap-3'>
                         <div className='flex gap-2 items-center'>
                             <img className='w-8 h-8' src="https://i.postimg.cc/sXSrVkwV/icons8-visitors-64.png" alt="" />
                             <div className='flex items-center gap-2'>
                                 <h3 className='font-bold'>Visitor per year: </h3>
-                                <h2>{totalVisitorsPerYear}</h2>
+                                <h2 className='text-[#868EA4]'>{totalVisitorsPerYear}</h2>
                             </div>
                         </div>
                         <div className='flex gap-2 items-center'>
                             <img className='w-8 h-8' src="https://i.postimg.cc/fLv8j5bc/icons8-time.gif" alt="" />
                             <div className='flex items-center gap-2'>
                                 <h3 className='font-bold'>Travel Time: </h3>
-                                <h2>{travel_time}</h2>
+                                <h2 className='text-[#868EA4]'>{travel_time}</h2>
                             </div>
                         </div>
                     </div>

@@ -30,7 +30,7 @@ const SpotDetails = () => {
                         </div>
                     </div>
                     <div className="mt-4">
-                        <p><span className="font-bold">{tourists_spot_name}: </span>{short_description}</p>
+                        <p><span className="font-bold">{tourists_spot_name}: </span><span className="text-[#868EA4]">{short_description}</span></p>
                     </div>
                     <div className="flex flex-col mt-6 space-y-4">
                         <div className="flex flex-col lg:flex-row items-center gap-3">
