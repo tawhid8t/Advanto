@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import AboutUs from "./AboutUs";
 import ContactUs from "./ContactUs";
 import SingleSpot from "../All_Tourist_Spot/SingleSpot";
@@ -17,7 +17,9 @@ const Home = () => {
                     }
                 </div>
                 <div className="">
+                    <Link to="/allSpot">
                     <button className="btn text-center mx-auto bg-[#00BABE] text-white px-12 mt-6 flex justify-center">Show All</button>
+                    </Link>
                 </div>
             </div>
             <AboutUs></AboutUs>

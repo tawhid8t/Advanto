@@ -5,6 +5,7 @@ import { PiEyeBold } from "react-icons/pi";
 import { AuthContext } from "./AuthProvider";
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
+import { updateProfile } from "firebase/auth";
 
 const SignUp = () => {
 
@@ -41,6 +42,17 @@ const SignUp = () => {
                 form.reset();
                 toast.success('Successfully Register');
                 navigate('/login')
+
+                updateProfile(result.user, {
+                    displayName: name,
+                    photoURL: photoURL
+                })
+                .then(()=>{
+                    console.log('profile updated successfully');
+                })
+                .catch(error =>{
+                    console.log(error.message);
+                })
             })
             .catch(error => {
                 toast.error(error.message);

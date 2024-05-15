@@ -1,13 +1,16 @@
 import { NavLink } from "react-router-dom";
 import Advanto_logo from "../assets/images/Advanto_logo.png"
-import { useState } from "react";
+import { useContext, } from "react";
 import { AuthContext } from "../Auth/AuthProvider";
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 const Navbar = () => {
 
-    const { user, logOut } = useState(AuthContext)
-    console.log(user);
-
+    const { user, logOut, loader } = useContext(AuthContext)
+    if (loader) {
+        return <span className="loading loading-ring loading-lg"></span>
+    }
 
     const handleLogout = () => {
         logOut()
@@ -70,18 +73,20 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {
-                        user && <span>{user.email}</span>
-                    }
+
                     <div className="flex gap-2 items-center">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
-                                <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                {user && user.photoURL ? <Tippy content={user?.displayName}><img alt={user?.displayName} src={user?.photoURL} /></Tippy> :
+                                    <img src="https://i.postimg.cc/cJ5RQyQ3/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow-520826-1931.jpg" alt="" />
+                                }
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
-                            <NavLink to="/login"><button className="btn">Login</button></NavLink>
-                            <button onClick={handleLogout} className="btn">Logout</button>
+                            {
+                                user ? <button onClick={handleLogout} className="btn">Logout</button> : <NavLink to="/login"><button className="btn">Login</button></NavLink>
+
+                            }
                         </div>
                     </div>
                 </div>
