@@ -47,7 +47,7 @@ const Login = () => {
 
     return (
         <div className="hero min-h-screen mt-10">
-            <div className="hero-content flex-col lg:flex-row-reverse w-full px-16">
+            <div className="hero-content flex-col lg:flex-row-reverse w-full lg:px-16">
                 <div className="card shrink-0 w-full max-w-sm flex-1">
                     <div className="w-full mb-8">
                         <img className="w-32 mx-auto" src="https://i.postimg.cc/RZY6ZR1v/Advanto-logo-removebg-preview2.png" alt="" />

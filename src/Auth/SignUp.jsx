@@ -61,7 +61,7 @@ const SignUp = () => {
     }
     return (
         <div className="hero min-h-screen mt-10">
-            <div className="hero-content flex-col lg:flex-row w-full justify-between px-16">
+            <div className="hero-content flex-col lg:flex-row w-full justify-between lg:px-16">
                 <div className="">
                     <img className="rounded-2xl" src="https://i.postimg.cc/hPPNSbPy/file.jpg" alt="" />
                 </div>
@@ -109,7 +109,7 @@ const SignUp = () => {
                 </div>
             </div>
             <ToastContainer/>
-            <ToastContainer />
+            
         </div>
     );
 };

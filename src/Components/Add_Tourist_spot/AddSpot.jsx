@@ -45,7 +45,7 @@ function AddSpot() {
     }
 
     return (
-        <div className="my-14">
+        <div className="my-14 p-4">
             <form onSubmit={handleAddSpotSubmit} className="">
                 <div className="form-control space-y-4">
                     <div className="w-full">

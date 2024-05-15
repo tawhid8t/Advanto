@@ -16,6 +16,7 @@ import SignUp from './Auth/SignUp';
 import AuthProvider from './Auth/AuthProvider';
 import SpotDetails from './Components/SpotDetails/SpotDetails';
 import PageNotFound from './Error/PageNotFound';
+import Private from './Routes/Private';
 
 const router = createBrowserRouter([
   {
@@ -26,25 +27,29 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>,
-        loader: ()=> fetch('http://localhost:5000/allSpots')
+        loader: () => fetch('http://localhost:5000/allSpots')
       },
       {
         path: '/allSpot',
-        element: <AllSpot></AllSpot>,
-        loader: ()=> fetch('http://localhost:5000/allSpots') 
+        element: <Private>
+          <AllSpot></AllSpot>
+        </Private>,
+        loader: () => fetch('http://localhost:5000/allSpots')
       },
       {
         path: '/addSpot',
-        element: <AddSpot></AddSpot>
+        element: <Private><AddSpot></AddSpot></Private>
+        
       },
       {
-        path: '/myList',
-        element: <MyList></MyList>
+        path: '/myList/:userEmail',
+        element: <Private><MyList></MyList></Private>,
+        loader: ({params}) => fetch(`http://localhost:5000/mySpot/${params.userEmail}`)
       },
       {
         path: '/spotDetails/:id',
-        element: <SpotDetails></SpotDetails>,
-        loader: ({params}) => fetch(`http://localhost:5000/allSpots/${params.id}`)
+        element: <Private><SpotDetails></SpotDetails></Private>,
+        loader: ({ params }) => fetch(`http://localhost:5000/allSpots/${params.id}`)
       },
       {
         path: '/login',
@@ -61,7 +66,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </AuthProvider>
   </React.StrictMode>,
 )

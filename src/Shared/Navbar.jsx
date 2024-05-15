@@ -49,7 +49,7 @@ const Navbar = () => {
                 : isPending
                     ? "pending"
                     : ""
-        } to="/myList">My List</NavLink></li>
+        } to={`/myList/${user?.email}`}>My List</NavLink></li>
     </div>
     return (
         <div>
@@ -64,7 +64,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className="w-full">
-                        <img className="w-20" src={Advanto_logo} alt="" />
+                        <NavLink to="/"><img className="w-20" src={Advanto_logo} alt="" /></NavLink>
                     </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
@@ -77,7 +77,7 @@ const Navbar = () => {
                     <div className="flex gap-2 items-center">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
-                                {user && user.photoURL ? <Tippy content={user?.displayName}><img alt={user?.displayName} src={user?.photoURL} /></Tippy> :
+                                {user && user?.photoURL ? <Tippy content={user?.displayName}><img alt={user?.displayName} src={user?.photoURL} /></Tippy> :
                                     <img src="https://i.postimg.cc/cJ5RQyQ3/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow-520826-1931.jpg" alt="" />
                                 }
                             </div>
