@@ -1,9 +1,10 @@
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UpdateSpot = () => {
     const spotData = useLoaderData()
-    const { image, tourists_spot_name,  short_description, average_cost, seasonality, travel_time, totalVisitorsPerYear, country_Name, userName, userEmail } = spotData
-    const handleUpdate = e =>{
+    const { _id, image, tourists_spot_name, short_description, average_cost, seasonality, travel_time, totalVisitorsPerYear, country_Name, userName, userEmail } = spotData
+    const handleUpdate = e => {
         e.preventDefault();
         const form = e.target;
         const image = form.image.value;
@@ -17,8 +18,39 @@ const UpdateSpot = () => {
         const totalVisitorsPerYear = form.totalVisitorsPerYear.value;
         const userEmail = form.userEmail.value;
         const userName = form.userName.value;
-        const updateSpot = {image, tourists_spot_name, country_Name, location, short_description, average_cost, seasonality, travel_time, totalVisitorsPerYear, userEmail, userName}
+        const updateSpot = { image, tourists_spot_name, country_Name, location, short_description, average_cost, seasonality, travel_time, totalVisitorsPerYear, userEmail, userName }
         console.log(updateSpot);
+
+        // update functionality
+        Swal.fire({
+            title: "Do you want to save the changes?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Save",
+            denyButtonText: `Don't save`
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/allSpots/${_id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(updateSpot)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if(data.modifiedCount > 0){
+                            Swal.fire("Saved!", "", "success");
+                        }
+                    })
+                
+            } else if (result.isDenied) {
+                Swal.fire("Changes are not saved", "", "info");
+            }
+        });
+
     }
     return (
         <div className="my-14 p-4">
