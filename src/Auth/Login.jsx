@@ -3,7 +3,7 @@ import { PiEyeClosedBold } from "react-icons/pi";
 import { PiEyeBold } from "react-icons/pi";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +12,7 @@ const Login = () => {
     const navigate = useNavigate()
 
     const [showPass, setShowPass] = useState(false);
+    const location = useLocation()
 
     const handleLogin = e => {
         e.preventDefault()
@@ -27,7 +28,7 @@ const Login = () => {
                 console.log(result.user);
                 toast.success('login Successfully')
                 form.reset();
-                navigate('/');
+                navigate(location?.state ? location.state : '/');
             })
             .catch(error => {
                 toast.error(error.message);
@@ -38,6 +39,7 @@ const Login = () => {
         .then(result => {
             const user = result.user
             console.log(user);
+            navigate(location?.state ? location.state : '/');
         })
         .catch(error => {
             console.log(error.message)

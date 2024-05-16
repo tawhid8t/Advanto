@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
-import Advanto_logo from "../assets/images/Advanto_logo.png"
+import Advanto_logo from "../../assets/images/Advanto_logo.png"
 import { useContext, } from "react";
-import { AuthContext } from "../Auth/AuthProvider";
+import { AuthContext } from "../../Auth/AuthProvider";
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-
+import './NavbarButton.css'
 const Navbar = () => {
 
     const { user, logOut, loader } = useContext(AuthContext)
@@ -84,8 +84,7 @@ const Navbar = () => {
                         </div>
                         <div className="flex items-center gap-2">
                             {
-                                user ? <button onClick={handleLogout} className="btn">Logout</button> : <NavLink to="/login"><button className="btn">Login</button></NavLink>
-
+                                user ? <button onClick={handleLogout} className=" cssbuttons-io"><span>Logout</span></button> : <NavLink to="/login"><button className="cssbuttons-io"><span>Login</span></button></NavLink>
                             }
                         </div>
                     </div>

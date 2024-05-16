@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import './SingleSpotButton.css'
 const SingleSpot = ({ spot }) => {
-    const { _id, image, tourists_spot_name,  short_description, average_cost, seasonality, travel_time, totalVisitorsPerYear } = spot
+    const { _id, image, tourists_spot_name, short_description, average_cost, seasonality, travel_time, totalVisitorsPerYear } = spot
     return (
         <div>
             <div className="card bg-base-100 shadow-xl">
@@ -35,7 +36,9 @@ const SingleSpot = ({ spot }) => {
                             <img className='w-9 h-9' src="https://i.postimg.cc/44B8Y8qZ/icons8-seasonal-marketing-78.png" alt="" />
                             <h3 className='text-lg font-semibold'>{seasonality}</h3>
                         </div>
-                        <Link to={`/spotDetails/${_id}`}><button className="btn bg-[#00BABE] text-white">view details</button></Link>
+                        <Link to={`/spotDetails/${_id}`}><button className="view_button">
+                            <span>Details</span>
+                        </button></Link>
                     </div>
                 </div>
             </div>

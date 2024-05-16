@@ -1,13 +1,17 @@
 import { Link, useLoaderData } from "react-router-dom";
 import AboutUs from "./AboutUs";
 import ContactUs from "./ContactUs";
-import SingleSpot from "../All_Tourist_Spot/SingleSpot";
+import SingleSpot from "../All_Tourist_Spot/singleSpot/SingleSpot";
+import Banner from "./Slider";
 
 const Home = () => {
     const allSpot = useLoaderData();
     const haveToShow = allSpot.slice(0, 6)
     return (
-        <div>
+        <div className="p-4">
+            <div>
+                <Banner></Banner>
+            </div>
             <div className="mb-24">
                 <h1 className="text-center text-3xl bold">Popular Destination</h1>
                 <p className="text-center text-lg mt-3 text-[#868EA4] w-3/4 mx-auto">We live in a wonderful world that is full of beauty, charm and adventure. There is no end to the adventures we can have if only we seek them with our eyes open.</p>

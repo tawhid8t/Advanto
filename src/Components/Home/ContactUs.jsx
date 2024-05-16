@@ -2,7 +2,7 @@ const ContactUs = () => {
     return (
         <div>
             <h1 className="bold text-3xl text-center mt-8 mb-24">Contact Us</h1>
-            <div className="flex justify-between flex-col lg:flex-row gap-12 mt-12 mb-24 items-center p-4 lg:p-0">
+            <div className="flex justify-between flex-col lg:flex-row gap-12 mt-12 mb-24 items-center lg:p-0">
                 <div className="lg:flex-1 w-full">
                     <form action="">
                         <div className="w-full">

@@ -82,7 +82,7 @@ const UpdateSpot = () => {
                             <label className="label">
                                 <span className="label-text bold text-lg">Location</span>
                             </label>
-                            <input type="text" placeholder="location" name="location" defaultValue={location} className="input w-full input-bordered" required />
+                            <input type="text" placeholder="location" name="location" defaultValue={spotData?.location} className="input w-full input-bordered" required />
                         </div>
                         <div className="w-full">
                             <label className="label">
@@ -132,8 +132,10 @@ const UpdateSpot = () => {
                         </div>
                     </div>
                 </div>
-                <div className="form-control mt-6">
-                    <button className="btn bg-[#00BABE] text-white">Submit</button>
+                <div className="form-control mt-6 lg:w-2/4 lg:mx-auto">
+                    <button className="cursor-pointer transition-all bg-[#63D5D7] text-white px-6 py-2 rounded-lg border-[#00BABE] border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-blue-300 shadow-blue-300 active:shadow-none">
+                        Submit
+                    </button>
                 </div>
             </form>
         </div>

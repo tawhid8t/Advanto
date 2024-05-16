@@ -17,35 +17,37 @@ function AddSpot() {
         const totalVisitorsPerYear = form.totalVisitorsPerYear.value;
         const userEmail = form.userEmail.value;
         const userName = form.userName.value;
-        const newSpot = {image, tourists_spot_name, country_Name, location, short_description, average_cost, seasonality, travel_time, totalVisitorsPerYear, userEmail, userName}
+        const newSpot = { image, tourists_spot_name, country_Name, location, short_description, average_cost, seasonality, travel_time, totalVisitorsPerYear, userEmail, userName }
         console.log(newSpot);
 
         // send data to the backend
-        fetch('http://localhost:5000/allSpots',{
+        fetch('http://localhost:5000/allSpots', {
             method: "POST",
             headers: {
                 "content-type": "application/json"
             },
             body: JSON.stringify(newSpot)
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if(data.insertedId){
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Spot Added Successfully",
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-            }
-            form.reset()
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Spot Added Successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                form.reset()
+            })
     }
 
     return (
-        <div className="my-14 p-4">
+        <div className="mb-14 mt-8 p-4">
+            <h1 className="text-center text-3xl bold">Add your favorite tourist spot!!</h1>
+            <p className="text-center text-lg mt-3 text-[#868EA4] mb-10">The world is a book and those who do not travel read only one page — Saint Augustine</p>
             <form onSubmit={handleAddSpotSubmit} className="">
                 <div className="form-control space-y-4">
                     <div className="w-full">
@@ -100,7 +102,7 @@ function AddSpot() {
                             <label className="label">
                                 <span className="label-text bold text-lg">Travel time</span>
                             </label>
-                            <input type="text" placeholder="which time is best for travel" name="travel_time" className="input w-full input-bordered"/>
+                            <input type="text" placeholder="which time is best for travel" name="travel_time" className="input w-full input-bordered" />
                         </div>
                     </div>
                     <div className="flex justify-around gap-4 flex-col lg:flex-row">
@@ -124,8 +126,10 @@ function AddSpot() {
                         </div>
                     </div>
                 </div>
-                <div className="form-control mt-6">
-                    <button className="btn bg-[#00BABE] text-white">Submit</button>
+                <div className="form-control mt-6 lg:w-2/4 lg:mx-auto">
+                    <button className="cursor-pointer transition-all bg-[#63D5D7] text-white px-6 py-2 rounded-lg border-[#00BABE] border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-blue-300 shadow-blue-300 active:shadow-none">
+                        Submit
+                    </button>
                 </div>
             </form>
         </div>

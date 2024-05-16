@@ -60,7 +60,8 @@ const MyList = () => {
     }
     return (
         <div>
-            <h1 className="text-center text-3xl bold">My List section will be added: {spots.length}</h1>
+            <h1 className="text-center text-3xl bold">Check which spots you added!!</h1>
+            <p className="text-center text-lg mt-3 text-[#868EA4] mb-10 lg:w-2/3 mx-auto">Perhaps travel cannot prevent bigotry, but by demonstrating that all peoples cry, laugh, eat, worry, and die, it can introduce the idea that if we try and understand each other, we may even become friends</p>
             <div className="my-24">
                 <div className="overflow-x-auto">
                     <table className="table">
