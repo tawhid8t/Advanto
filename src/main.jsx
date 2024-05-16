@@ -17,6 +17,7 @@ import AuthProvider from './Auth/AuthProvider';
 import SpotDetails from './Components/SpotDetails/SpotDetails';
 import PageNotFound from './Error/PageNotFound';
 import Private from './Routes/Private';
+import UpdateSpot from './Components/Update/UpdateSpot';
 
 const router = createBrowserRouter([
   {
@@ -38,8 +39,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/addSpot',
-        element: <Private><AddSpot></AddSpot></Private>
-        
+        element: <Private><AddSpot></AddSpot></Private> 
       },
       {
         path: '/myList/:userEmail',
@@ -50,6 +50,11 @@ const router = createBrowserRouter([
         path: '/spotDetails/:id',
         element: <Private><SpotDetails></SpotDetails></Private>,
         loader: ({ params }) => fetch(`http://localhost:5000/allSpots/${params.id}`)
+      },
+      {
+        path: '/updateSpot/:id',
+        element: <Private><UpdateSpot></UpdateSpot></Private>,
+        loader: ({params})=> fetch(`http://localhost:5000/allSpots/${params.id}`)
       },
       {
         path: '/login',
