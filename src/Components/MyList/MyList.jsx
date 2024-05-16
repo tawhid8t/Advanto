@@ -1,11 +1,66 @@
 import { useLoaderData } from "react-router-dom";
 import './MyListButton.css'
+import Swal from "sweetalert2";
+import { useState } from "react";
 
 const MyList = () => {
     const mySpots = useLoaderData();
+    const [spots, setSpots] = useState(mySpots)
+
+    // delete functionality
+    const handleDelete = _id => {
+        console.log(_id);
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/allSpots/${_id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.deletedCount > 0) {
+                            swalWithBootstrapButtons.fire({
+                                title: "Deleted!",
+                                text: "Your spot has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                        const remaining = spots.filter(spot => spot._id !== _id);
+                        setSpots(remaining)
+                    })
+
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelled",
+                    text: "Your imaginary spot is safe :)",
+                    icon: "error"
+                });
+            }
+        });
+
+    }
     return (
         <div>
-            <h1 className="text-center text-3xl bold">My List section will be added: {mySpots.length}</h1>
+            <h1 className="text-center text-3xl bold">My List section will be added: {spots.length}</h1>
             <div className="my-24">
                 <div className="overflow-x-auto">
                     <table className="table">
@@ -21,7 +76,7 @@ const MyList = () => {
                             </tr>
                         </thead>
                         {
-                            mySpots.map((spot) => <tbody key={spot._id}>
+                            spots.map((spot) => <tbody key={spot._id}>
                                 <tr className="hover">
                                     <th></th>
                                     <td>{spot?.country_Name}</td>
@@ -29,7 +84,7 @@ const MyList = () => {
                                     <td>${spot?.average_cost}</td>
                                     <td>{spot?.seasonality}</td>
                                     <td className="flex flex-col gap-2">
-                                        <button className="delete_button">
+                                        <button onClick={() => handleDelete(spot?._id)} className="delete_button">
                                             <span className="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span>
                                             <span className="text">Delete</span>
                                         </button>
