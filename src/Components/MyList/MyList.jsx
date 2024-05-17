@@ -28,7 +28,7 @@ const MyList = () => {
         }).then((result) => {
 
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/allSpots/${_id}`, {
+                fetch(`https://advanto-server.vercel.app/allSpots/${_id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())

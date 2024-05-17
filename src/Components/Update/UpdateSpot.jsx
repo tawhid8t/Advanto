@@ -31,7 +31,7 @@ const UpdateSpot = () => {
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/allSpots/${_id}`, {
+                fetch(`https://advanto-server.vercel.app/allSpots/${_id}`, {
                     method: 'PUT',
                     headers: {
                         'content-type': 'application/json'

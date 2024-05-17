@@ -21,7 +21,7 @@ function AddSpot() {
         console.log(newSpot);
 
         // send data to the backend
-        fetch('http://localhost:5000/allSpots', {
+        fetch('https://advanto-server.vercel.app/allSpots', {
             method: "POST",
             headers: {
                 "content-type": "application/json"

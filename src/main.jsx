@@ -28,13 +28,13 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/allSpots')
+        loader: () => fetch('https://advanto-server.vercel.app/allSpots')
       },
       {
         path: '/allSpot',
         element:
           <AllSpot></AllSpot>,
-        loader: () => fetch('http://localhost:5000/allSpots')
+        loader: () => fetch('https://advanto-server.vercel.app/allSpots')
       },
       {
         path: '/addSpot',
@@ -43,17 +43,17 @@ const router = createBrowserRouter([
       {
         path: '/myList/:userEmail',
         element: <Private><MyList></MyList></Private>,
-        loader: ({params}) => fetch(`http://localhost:5000/mySpot/${params.userEmail}`)
+        loader: ({params}) => fetch(`https://advanto-server.vercel.app/mySpot/${params.userEmail}`)
       },
       {
         path: '/spotDetails/:id',
         element: <Private><SpotDetails></SpotDetails></Private>,
-        loader: ({ params }) => fetch(`http://localhost:5000/allSpots/${params.id}`)
+        loader: ({ params }) => fetch(`https://advanto-server.vercel.app/allSpots/${params.id}`)
       },
       {
         path: '/updateSpot/:id',
         element: <Private><UpdateSpot></UpdateSpot></Private>,
-        loader: ({params})=> fetch(`http://localhost:5000/allSpots/${params.id}`)
+        loader: ({params})=> fetch(`https://advanto-server.vercel.app/allSpots/${params.id}`)
       },
       {
         path: '/login',
